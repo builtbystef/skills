@@ -52,4 +52,4 @@ Each file below starts from a template in [assets/templates/](assets/templates/)
 
 `docs/TRACKER.md` — the selected file from [references/trackers/](references/trackers/), with the placeholders resolved (team, repository). For freeform: the user's workflow paragraph, under a `# Tracker: {{name}}` heading.
 
-A second run of this skill on a grown project is safe and expected. It fills only what is missing — checks that the stack now supports, CI when a remote exists — and it never recreates what is there.
+A second run of this skill on a grown project is safe and expected. It fills only what is missing, checks that the stack now supports, CI when a remote exists,  and it never recreates what is there.
