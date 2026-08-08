@@ -6,7 +6,7 @@
 - The command receives the iteration prompt **on stdin**. Exception: if the command contains the placeholder `{PROMPT_FILE}`, the script substitutes the path of the prompt file, and it does not pipe.
 - The command must never prompt a human. Anything interactive stalls until `LOOP_TIMEOUT` (default 3600 s) kills it, and the iteration counts as failed.
 
-An unattended session must have the power to act without questions. Anything that prompts a human stalls until the timeout kills it. For this reason, the recipes below skip permissions fully. For the same reason, the loop belongs inside the project's container sandbox (`/set-up-sandbox`, then a session inside `./sandbox/start.sh`): contained, full autonomy costs only the repository. Without a sandbox, the same recipes give each iteration unconfined shell access to the machine and its credentials. That is the user's decision to make, with the risk stated plainly.
+An unattended session must have the power to act without questions. Anything that prompts a human stalls until the timeout kills it. For this reason, the recipes below skip permissions fully. For the same reason, the loop belongs inside the project's container sandbox (invoke the `set-up-sandbox` skill, then start a session inside `./sandbox/start.sh`): contained, full autonomy costs only the repository. Without a sandbox, the same recipes give each iteration unconfined shell access to the machine and its credentials. That is the user's decision to make, with the risk stated plainly.
 
 ## Claude Code
 

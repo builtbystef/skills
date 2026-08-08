@@ -21,7 +21,7 @@ A **seam** is the public boundary that you test at: the interface where behavior
 
 - **Red before green.** Write the failing test first. See it fail. Then write only enough code to make it pass. Do not add speculative features. Do not write tests for behavior that does not exist yet.
 - **One slice at a time.** One seam, one test, one minimal implementation in each cycle. Each test is a tracer bullet that reacts to what the last cycle taught you.
-- **Refactor work is not part of the loop.** The red → green cycle only makes the test pass. Improvements come later as `/review-code` findings, and they flow back as issues.
+- **Refactor work is not part of the loop.** The red → green cycle only makes the test pass. Improvements come later as findings from the `review-code` skill, and they flow back as issues.
 
 ## Anti-patterns — delete them when you see them
 

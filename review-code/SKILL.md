@@ -8,7 +8,7 @@ argument-hint: "a ref, a range, or paths; no argument means uncommitted changes"
 
 Review the changes on two independent axes. A change can obey each standard and build the wrong thing. A change can also do exactly what was asked and break each convention. Separate reports prevent one axis from a mask over the other. Each axis runs as its own sub-agent, so that their file reads do not pollute each other's context. This session pins the scope, writes the briefs, and collects the results.
 
-The skill operates with or without a tracker. If `docs/TRACKER.md` exists, the spec search and the filed findings resolve through the tracker. If not, skip those parts — the report is then the deliverable — and suggest `/set-up-for-agents` one time, at the end.
+The skill operates with or without a tracker. If `docs/TRACKER.md` exists, the spec search and the filed findings resolve through the tracker. If not, skip those parts — the report is then the deliverable — and suggest invoking the `set-up-for-agents` skill one time, at the end.
 
 ## Steps
 

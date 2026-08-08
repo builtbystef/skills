@@ -16,7 +16,7 @@ Four rules keep the session clean:
 - If the issue is blocked on missing work or a missing decision, write a note that tells why. Then release the claim and stop.
 - If no issue is ready, tell the user and stop.
 
-If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to run `/set-up-for-agents`.
+If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to invoke the `set-up-for-agents` skill.
 
 ## Steps
 

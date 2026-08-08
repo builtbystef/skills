@@ -7,9 +7,9 @@ disable-model-invocation: true
 
 # Create Specification
 
-Write a specification from the decisions that this session already made. Do not invent new decisions. An implementer must be able to build from the spec without questions. The spec becomes an issue in the tracker. The issue body is the specification. The implementation slices become its sub-issues through `/create-issues`.
+Write a specification from the decisions that this session already made. Do not invent new decisions. An implementer must be able to build from the spec without questions. The spec becomes an issue in the tracker. The issue body is the specification. The implementation slices become its sub-issues through the `create-issues` skill.
 
-If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to run `/set-up-for-agents`.
+If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to invoke the `set-up-for-agents` skill.
 
 ## Steps
 
@@ -25,4 +25,4 @@ If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to run
 
 4. **Review the draft with the user.** Show the draft to the user, section by section. Apply the user's corrections. This step is complete when the user approves the draft.
 
-5. **Publish the spec.** Publish one issue. The title is the spec's title. The label is `spec`. The body is the approved spec. If the spec covers a roadmap area, record a blocking edge from the spec issue to each closed node that the spec covers. These edges record the source of the spec, so that its lineage is walkable. This step is complete when the issue exists and you suggested `/create-issues {{spec-ref}}` to the user.
+5. **Publish the spec.** Publish one issue. The title is the spec's title. The label is `spec`. The body is the approved spec. If the spec covers a roadmap area, record a blocking edge from the spec issue to each closed node that the spec covers. These edges record the source of the spec, so that its lineage is walkable. This step is complete when the issue exists and you suggested invoking the `create-issues` skill with `{{spec-ref}}` to the user.

@@ -7,9 +7,9 @@ disable-model-invocation: true
 
 # Maintain Codebase
 
-This session audits the codebase and files issues. The fixes then flow through `/implement`, like other work. An audit that also attempts its own refactors does both tasks badly.
+This session audits the codebase and files issues. The fixes then flow through the `implement` skill, like other work. An audit that also attempts its own refactors does both tasks badly.
 
-If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to run `/set-up-for-agents`.
+If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to invoke the `set-up-for-agents` skill.
 
 Audit vocabulary: a **module** is anything with an interface and an implementation — a function, a class, or a package. A module is **deep** when a small interface hides much behavior. A module is **shallow** when the interface is almost as complex as what it hides. The **deletion test** shows shallowness. Imagine that you delete the module. If the complexity disappears, the module was a pass-through. If the complexity appears again across the callers, the module was useful.
 

@@ -28,7 +28,7 @@ When a question waits on a fact from the environment (filesystem, repository, to
 - **Compare with the code.** When the user tells how something operates, examine whether the code agrees. This is a quick search. Show the contradictions. Example: "The code cancels full Orders, but you said that partial cancellation is possible — which is correct?"
 - **Offer an ADR rarely.** Offer one only when a decision is hard to reverse, and surprising without context, _and_ a real trade-off. Path: `docs/adr/NNNN-{{slug}}.md`. A title plus 1–3 sentences (context, decision, reason) is a complete ADR.
 
-In a repository without `docs/GLOSSARY.md` or `docs/adr/`, interview without the records. Suggest `/set-up-for-agents` one time, at the end.
+In a repository without `docs/GLOSSARY.md` or `docs/adr/`, interview without the records. Suggest invoking the `set-up-for-agents` skill one time, at the end.
 
 ## Done
 

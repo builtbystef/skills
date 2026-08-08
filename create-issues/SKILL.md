@@ -9,11 +9,11 @@ disable-model-invocation: true
 
 Turn a spec into issues that an agent can take cold and complete — **tracer bullets**. Publication goes through the tracker doc, `docs/TRACKER.md`.
 
-If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to run `/set-up-for-agents`.
+If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to invoke the `set-up-for-agents` skill.
 
 ## Steps
 
-1. **Gather.** Fetch the spec issue: the reference in the argument, or else the spec issue that this session published. If neither exists, stop, and point the user to `/create-specification`. Explore the code that the spec touches, if you did not do this before. This step is complete when you can state each requirement without a second read of the spec.
+1. **Gather.** Fetch the spec issue: the reference in the argument, or else the spec issue that this session published. If neither exists, stop, and point the user to the `create-specification` skill. Explore the code that the spec touches, if you did not do this before. This step is complete when you can state each requirement without a second read of the spec.
 
 2. **Slice.** Write the draft of the issue set. Follow these rules:
    - Each slice cuts a narrow but **complete** path through each layer that it needs (schema, logic, API, UI, tests). A slice is vertical, never one layer wide.
@@ -31,4 +31,4 @@ If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to run
 
 4. **Publish.** Publish the sub-issues in dependency order — blockers first, so that blocking edges point to real references. Each sub-issue has the spec issue as parent, a priority, its blocking edges, and the body shape in [assets/templates/sub-issue.md](assets/templates/sub-issue.md).
 
-   The spec issue is the umbrella. Its `spec` label keeps it out of the build queue. `/implement` builds its sub-issues, never the spec issue. Bodies contain behavior and criteria, never file paths or code snippets. Exception: a snippet from a prototype that records a decision more precisely than prose (a state machine, a schema, a type shape), cut to the part that shows the decision. This step is complete when these conditions are true: each approved slice is published with its edges; the slices without blockers appear when you list ready work; and you told the user to work the ready issues with `/implement`, one issue for each session.
+   The spec issue is the umbrella. Its `spec` label keeps it out of the build queue. The `implement` skill builds its sub-issues, never the spec issue. Bodies contain behavior and criteria, never file paths or code snippets. Exception: a snippet from a prototype that records a decision more precisely than prose (a state machine, a schema, a type shape), cut to the part that shows the decision. This step is complete when these conditions are true: each approved slice is published with its edges; the slices without blockers appear when you list ready work; and you told the user to invoke the `implement` skill for each ready issue, one issue for each session.

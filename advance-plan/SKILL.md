@@ -7,9 +7,9 @@ disable-model-invocation: true
 
 # Advance Plan
 
-A roadmap is a goal too large for one planning session. The tracker holds it as a **DAG**. Each **node** is a sub-issue that asks one question, with the size of one fresh session. Each **edge** is a blocking relation: a node cannot start until each node that it depends on is closed. A node is **ready** when it is open, unclaimed, and no blocker of it is open. The DAG is the record. A closed node's note holds its answer, and the reason. Nothing duplicates the note elsewhere. Each `/advance-plan` session resolves exactly one node. Then it extends the DAG with what the answer made sharp.
+A roadmap is a goal too large for one planning session. The tracker holds it as a **DAG**. Each **node** is a sub-issue that asks one question, with the size of one fresh session. Each **edge** is a blocking relation: a node cannot start until each node that it depends on is closed. A node is **ready** when it is open, unclaimed, and no blocker of it is open. The DAG is the record. A closed node's note holds its answer, and the reason. Nothing duplicates the note elsewhere. Each invocation of the `advance-plan` skill resolves exactly one node. Then it extends the DAG with what the answer made sharp.
 
-Each operation below resolves through the **Roadmap operations** section of the tracker doc (`docs/TRACKER.md`). If the doc is missing, stop, and ask the user to run `/set-up-for-agents`.
+Each operation below resolves through the **Roadmap operations** section of the tracker doc (`docs/TRACKER.md`). If the doc is missing, stop, and ask the user to invoke the `set-up-for-agents` skill.
 
 ## The DAG
 
@@ -28,9 +28,9 @@ Where a type points to a skill, read the skill and follow it. The node's body is
 - `session:prototype` (HITL) — "how must it look or behave" gates a decision → [`../prototype/SKILL.md`](../prototype/SKILL.md).
 - `session:grill` (HITL) — a decision that needs the user → [`../grill-me/SKILL.md`](../grill-me/SKILL.md), limited to the node's question.
 - `session:task` (HITL or AFK) — work that must occur before a decision is possible. There is nothing to decide, research, or prototype, but the decision waits on the work. Examples: registration for a service, so that its API can be judged; access provision; a data move, so that the data's shape is visible. Do the work yourself where you can. Where you cannot, give the user a precise checklist. At closure, the note records the completed work, plus the facts that later nodes depend on: credential locations, new URLs, counts.
-- `session:spec` (HITL) — the decisions of an **area** are all closed; write their spec. An area is a set of closed nodes whose answers an implementer needs together. A small roadmap is one area. A large roadmap divides along seams, where parts can be implemented independently of what is still open. Read the notes and linked artifacts of the area's closed nodes (only that area's, not the full roadmap's). Interview to close the remaining gaps ([`../grill-me/SKILL.md`](../grill-me/SKILL.md)). Confirm with the user. Then run `/create-specification`. The spec issue is published with a blocking edge back to each node that it covers, so that its lineage is walkable.
+- `session:spec` (HITL) — the decisions of an **area** are all closed; write their spec. An area is a set of closed nodes whose answers an implementer needs together. A small roadmap is one area. A large roadmap divides along seams, where parts can be implemented independently of what is still open. Read the notes and linked artifacts of the area's closed nodes (only that area's, not the full roadmap's). Interview to close the remaining gaps ([`../grill-me/SKILL.md`](../grill-me/SKILL.md)). Confirm with the user. Then invoke the `create-specification` skill. The spec issue is published with a blocking edge back to each node that it covers, so that its lineage is walkable.
 
-The user can also work a node directly in a fresh session (`/research {{node-ref}}`, `/prototype {{node-ref}}`, `/grill-me {{node-ref}}`). Those sessions claim the node, write its note, and close it themselves.
+The user can also work a node directly in a fresh session by invoking the `research`, `prototype`, or `grill-me` skill with `{{node-ref}}`. Those sessions claim the node, write its note, and close it themselves.
 
 ## Create the roadmap
 
@@ -39,7 +39,7 @@ Do this one time, from the session that found the goal too large (create-plan st
 1. Create the root issue.
 2. Add the nodes that you can state sharply now, in dependency order — blockers first, so that edges point to real references.
 3. Put everything that is in scope, but not sharp yet, in the Frontier.
-4. Tell the user that each later session is `/advance-plan {{root-ref}}`. Then stop. The creation of the roadmap is that session's full job.
+4. Tell the user to invoke the `advance-plan` skill with `{{root-ref}}` in each later session. Then stop. The creation of the roadmap is that session's full job.
 
 ## Advance
 

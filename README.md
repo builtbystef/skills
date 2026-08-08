@@ -42,6 +42,15 @@ npx skills add builtbystef/skills --skill set-up-sandbox
 | [research](research/SKILL.md)                         | Answer a question from primary sources, with citations             | User & model |
 | [prototype](prototype/SKILL.md)                       | Disposable code that answers a design question                     | User & model |
 
+## Additional Information
+
+Skill instructions use host-neutral wording. Invoke a skill by name, or use the host's explicit syntax when passing arguments:
+
+```text
+Claude Code: /implement ISSUE-123
+Codex CLI: $implement ISSUE-123
+```
+
 ## Credits
 
 This collection is largely based on [Matt Pocock's skills repository](https://github.com/mattpocock/skills), adjusted to my own workflow.
