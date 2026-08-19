@@ -14,3 +14,7 @@ You are one iteration of an unattended implement-loop run. No user watches, and 
    The line must start with `{{REF}}` exactly. The outcome word must be one of the four words above. A script parses this line, and silence counts as failed. Use `failed` also when no work on the issue is possible: another actor claimed it, it is missing, or it is malformed. An issue that is already closed reports `closed`.
 
 3. Keep the working tree clean: commit the work as the skill says, and revert everything else. The next iteration starts from what you leave.
+
+4. Never bypass a commit hook. No `--no-verify`, no `--no-hooks`, no disabling a hook in config. The hooks and the checks in the entry file are this run's only quality gate. A hook that fails means the code is wrong — fix the code. If you cannot make the hooks pass, report `failed` and say why.
+
+5. `closed` requires a commit. A report of `closed` that leaves HEAD where it started is recorded as failed, whatever the line says.

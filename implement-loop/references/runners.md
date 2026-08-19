@@ -24,6 +24,14 @@ LOOP_AGENT_CMD='codex exec --dangerously-bypass-approvals-and-sandbox --model <m
 
 Pin the model and `model_reasoning_effort`; supported effort levels depend on the model.
 
+## Pi
+
+```sh
+LOOP_AGENT_CMD='pi -p --approve --model <provider/id> --thinking <level>'
+```
+
+Pin the model and thinking level. Pi supports `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. `--model` takes `provider/id` — `pi --list-models` lists what the machine is authenticated for. `--approve` trusts the project's local files for the run; print mode shows no trust prompt and no tool approvals. Sessions are saved by default, one full transcript for each iteration — read one later with `pi --resume`, or `pi --export <file>` for HTML.
+
 ## Any other agent
 
 Any non-interactive agent CLI works. For a prompt file, use:
@@ -32,29 +40,18 @@ Any non-interactive agent CLI works. For a prompt file, use:
 LOOP_AGENT_CMD='someagent run --auto --prompt-file {PROMPT_FILE}'
 ```
 
-## Script flavors
+## The other knob
 
-The two flavors behave identically:
+`LOOP_TIMEOUT` (default `3600`) is the number of seconds one iteration may take. An overrun kills the session, and the iteration counts as failed. A hung session is the one failure the run cannot otherwise recover from; everything else is a report line.
 
-| Script | Start | Needs |
-| --- | --- | --- |
-| `loop.sh` | `bash loop.sh <run-dir>` | Bash + GNU `timeout` (macOS: `brew install coreutils`) |
-| `loop.py` | `python3 loop.py <run-dir>` | Python 3.8+, stdlib only |
+`STALL_LIMIT` is a constant at the top of `loop.sh` (default `3`): after that many iterations in a row without a closure, the run halts, because something systemic is wrong and more iterations only burn money. Edit the script to change it.
 
-The Python flavor controls timeouts natively. It does not need GNU `timeout`.
+## Quality gate
 
-## Knobs
-
-| Env | Default | Meaning |
-| --- | --- | --- |
-| `LOOP_VERIFY_CMD` | off | An independent check suite that runs after each `closed`. A failure reclassifies the iteration as failed. Set it to the project's test or lint command, whenever one exists |
-| `LOOP_TIMEOUT` | `3600` | Seconds for each iteration (and for each verify run). An overrun kills the session, and the iteration counts as failed |
-| `LOOP_MAX_RUNTIME` | off | A wall-clock limit for the full run, in seconds — the limit for overnight runs |
-| `LOOP_SPLICE_CAP` | `5` | The maximum number of discovered blockers added to the queue in one run |
-| `LOOP_STALL_LIMIT` | `3` | The number of iterations in a row without a closure, before the run stops |
+The loop does not run tests. Backpressure belongs in the repository, where every agent meets it: pre-commit hooks for format and lint, and the checks the entry file (`AGENTS.md` / `CLAUDE.md`) tells sessions to run. The iteration prompt forbids `--no-verify`. The loop's own check is narrow and unspoofable — a `closed` report that did not move `HEAD` is recorded as failed.
 
 ## Cost ceiling
 
-A queued issue runs at most twice, and up to `LOOP_SPLICE_CAP` blockers may join. Worst case: `2 × (queue length + LOOP_SPLICE_CAP)` sessions. Set `LOOP_MAX_RUNTIME` for overnight runs.
+One session for each queued issue, no retries: the run costs exactly as many sessions as the queue is long. A failed issue is reported, not repeated — re-invoke the skill with it once you know why.
 
-Whichever flavor runs, start it from inside the project's git repository, with a clean working tree.
+`loop.sh` needs Bash plus GNU `timeout` (macOS: `brew install coreutils`). Start it from inside the project's git repository, with a clean working tree.
