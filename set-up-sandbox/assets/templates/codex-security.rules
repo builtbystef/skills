@@ -1,0 +1,59 @@
+prefix_rule(
+    pattern = ["sudo"],
+    decision = "forbidden",
+    justification = "Privilege escalation is disabled in this project.",
+)
+
+prefix_rule(
+    pattern = ["su"],
+    decision = "forbidden",
+    justification = "Privilege escalation is disabled in this project.",
+)
+
+prefix_rule(
+    pattern = ["doas"],
+    decision = "forbidden",
+    justification = "Privilege escalation is disabled in this project.",
+)
+
+prefix_rule(
+    pattern = ["ssh"],
+    decision = "forbidden",
+    justification = "Remote access is disabled in this project.",
+)
+
+prefix_rule(
+    pattern = ["scp"],
+    decision = "forbidden",
+    justification = "Remote access is disabled in this project.",
+)
+
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "forbidden",
+    justification = "The developer pushes, after reviewing the work.",
+)
+
+prefix_rule(
+    pattern = ["terraform", "apply"],
+    decision = "forbidden",
+    justification = "Deployment is a human action in this project.",
+)
+
+prefix_rule(
+    pattern = ["terraform", "destroy"],
+    decision = "forbidden",
+    justification = "Deployment is a human action in this project.",
+)
+
+prefix_rule(
+    pattern = ["kubectl", "apply"],
+    decision = "forbidden",
+    justification = "Cluster changes are a human action in this project.",
+)
+
+prefix_rule(
+    pattern = ["kubectl", "delete"],
+    decision = "forbidden",
+    justification = "Cluster changes are a human action in this project.",
+)

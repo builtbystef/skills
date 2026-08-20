@@ -27,7 +27,7 @@ npx skills add builtbystef/skills --skill set-up-sandbox
 | Skill                                                 | Purpose                                                            | Invoked by   |
 | ----------------------------------------------------- | ------------------------------------------------------------------ | ------------ |
 | [set-up-for-agents](set-up-for-agents/SKILL.md)       | Create `docs/` and the tracker doc                                 | User         |
-| [set-up-sandbox](set-up-sandbox/SKILL.md)             | Set up a disposable container sandbox for agent sessions           | User         |
+| [set-up-sandbox](set-up-sandbox/SKILL.md)             | Set up native, OS-enforced sandboxing for agent sessions           | User         |
 | [create-plan](create-plan/SKILL.md)                   | Interview until a goal is planned, or create a roadmap DAG         | User         |
 | [advance-plan](advance-plan/SKILL.md)                 | Advance a roadmap by one node; extend the DAG as it becomes sharp  | User         |
 | [grill-me](grill-me/SKILL.md)                         | Stress-test a plan or design, in rounds of questions               | User & model |

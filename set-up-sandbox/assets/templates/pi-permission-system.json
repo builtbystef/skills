@@ -1,0 +1,27 @@
+{
+  "permission": {
+    "*": "allow",
+    "path": {
+      "*": "allow",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      "**/*.pem": "deny",
+      "**/*.key": "deny",
+      ".pi/**": "deny"
+    },
+    "bash": {
+      "*": "allow",
+      "sudo *": "deny",
+      "su *": "deny",
+      "doas *": "deny",
+      "ssh *": "deny",
+      "scp *": "deny",
+      "git push*": "deny",
+      "terraform apply*": "deny",
+      "terraform destroy*": "deny",
+      "kubectl apply*": "deny",
+      "kubectl delete*": "deny"
+    },
+    "external_directory": "deny"
+  }
+}

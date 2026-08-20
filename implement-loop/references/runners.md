@@ -6,23 +6,23 @@
 - The command receives the iteration prompt **on stdin**. Exception: if the command contains the placeholder `{PROMPT_FILE}`, the script substitutes the path of the prompt file, and it does not pipe.
 - The command must never prompt a human. Anything interactive stalls until `LOOP_TIMEOUT` (default 3600 s) kills it, and the iteration counts as failed.
 
-Run these recipes inside the project's container sandbox (`./sandbox/start.sh`). They skip permission prompts; outside that sandbox, they give each iteration unconfined access to the machine and its credentials.
+Run these recipes in a repository that carries the native sandbox config from the `set-up-sandbox` skill. The recipes run without prompts; the project's sandbox config is what confines them. Never add the bypass flags: `--dangerously-skip-permissions` auto-approves everything the project's deny rules do not name, and `--dangerously-bypass-approvals-and-sandbox` turns the Codex sandbox off entirely. Without sandbox config in the repository, these recipes give each iteration broad access to the machine and its credentials — that posture is the user's to accept.
 
 ## Claude Code
 
 ```sh
-LOOP_AGENT_CMD='claude -p --dangerously-skip-permissions --model <model> --effort <effort>'
+LOOP_AGENT_CMD='claude -p --permission-mode acceptEdits --model <model> --effort <effort>'
 ```
 
-Pin the model and effort. Claude Code supports `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model.
+Pin the model and effort. Claude Code supports `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. With the project's sandbox config, sandboxed Bash auto-runs and edits inside the repository auto-approve; anything else fails closed, because print mode cannot prompt.
 
 ## OpenAI Codex
 
 ```sh
-LOOP_AGENT_CMD='codex exec --dangerously-bypass-approvals-and-sandbox --model <model> --config model_reasoning_effort=<effort>'
+LOOP_AGENT_CMD='codex exec --model <model> --config model_reasoning_effort=<effort>'
 ```
 
-Pin the model and `model_reasoning_effort`; supported effort levels depend on the model.
+Pin the model and `model_reasoning_effort`; supported effort levels depend on the model. The project's `.codex/config.toml` supplies the sandbox profile and `approval_policy = "never"` — but only when the project is trusted in Codex, so trust it once, interactively, before the first run.
 
 ## Pi
 
@@ -30,7 +30,7 @@ Pin the model and `model_reasoning_effort`; supported effort levels depend on th
 LOOP_AGENT_CMD='pi -p --approve --model <provider/id> --thinking <level>'
 ```
 
-Pin the model and thinking level. Pi supports `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. `--model` takes `provider/id` — `pi --list-models` lists what the machine is authenticated for. `--approve` trusts the project's local files for the run; print mode shows no trust prompt and no tool approvals. Sessions are saved by default, one full transcript for each iteration — read one later with `pi --resume`, or `pi --export <file>` for HTML.
+Pin the model and thinking level. Pi supports `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. `--model` takes `provider/id` — `pi --list-models` lists what the machine is authenticated for. `--approve` trusts the project's local files for the run; print mode shows no trust prompt and no tool approvals. Core Pi has no sandbox — the confinement comes from the `pi-sandbox` and `@gotgenes/pi-permission-system` extensions and their config under `.pi/`, set up by the `set-up-sandbox` skill. Their denies are hard and their prompts time out to abort, so print mode fails closed instead of stalling. Sessions are saved by default, one full transcript for each iteration — read one later with `pi --resume`, or `pi --export <file>` for HTML.
 
 ## Any other agent
 

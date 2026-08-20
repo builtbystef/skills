@@ -1,0 +1,29 @@
+# Project sandbox for Codex. Loaded only when the project is trusted.
+# The permission-profile system is beta — after a Codex update, re-run the
+# escape checks from the set-up-sandbox skill before trusting this config.
+
+default_permissions = "project-locked"
+approval_policy = "never"
+
+[features]
+# Without the proxy, the domain rules below do not enforce and commands
+# have direct network access.
+network_proxy = true
+
+[permissions.project-locked.filesystem]
+":minimal" = "read"
+
+[permissions.project-locked.filesystem.":workspace_roots"]
+"." = "write"
+"**/*.env" = "deny"
+"**/*.pem" = "deny"
+"**/*.key" = "deny"
+
+[permissions.project-locked.network]
+enabled = true
+
+[permissions.project-locked.network.domains]
+# {{allowed-domains}} — one "allow" line per domain from the settled policy.
+"github.com" = "allow"
+"*.github.com" = "allow"
+"*" = "deny"

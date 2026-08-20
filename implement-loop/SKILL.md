@@ -13,7 +13,7 @@ The loop does not run tests. Backpressure belongs in the repository — pre-comm
 
 If the `docs/` folder or `docs/TRACKER.md` is missing, stop. Ask the user to invoke the `set-up-for-agents` skill. The `implement` skill must also be installed in this project. If it is not, stop and say so.
 
-The recommended place for a loop is inside the project's container sandbox. The iterations run with permission prompts off, and the sandbox limits their blast radius to the repository. If the session is not in a sandbox, and the repository has no `sandbox/`, suggest this sequence: invoke the `set-up-sandbox` skill first, then start a session inside `./sandbox/start.sh`, and invoke this skill again there. A run without a sandbox is the user's decision. Do not block on it. But say plainly that each iteration then has full, unconfined shell access to the machine.
+The recommended place for a loop is a repository that carries the native sandbox config from the `set-up-sandbox` skill (`.claude/settings.json`, `.codex/config.toml`, `.pi/permission-mode.json`). The iterations then run without prompts, and the OS-level sandbox limits their blast radius to the repository. If none of that config exists, suggest invoking the `set-up-sandbox` skill first, then this skill again. A run without a sandbox is the user's decision. Do not block on it. But say plainly that each iteration then has full, unconfined access to the machine.
 
 While the loop runs, the loop owns the working tree. Do not edit files. Do not claim issues. Do not commit. A dirty tree leaks into the next iteration's commit.
 

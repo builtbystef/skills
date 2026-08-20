@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "permissionPromptTimeoutSeconds": 5,
+  "network": {
+    "allowLocalBinding": false,
+    "allowAllUnixSockets": false,
+    "allowUnauthenticatedSocksProxy": false,
+    "allowedDomains": ["{{allowed-domains}}"],
+    "deniedDomains": []
+  },
+  "filesystem": {
+    "denyRead": [
+      "/home",
+      "/Users",
+      "/run/docker.sock",
+      "/var/run/docker.sock",
+      "/run/podman/podman.sock"
+    ],
+    "allowRead": ["."],
+    "allowWrite": ["."],
+    "denyWrite": [".pi", ".env", ".env.*", "*.pem", "*.key"]
+  }
+}
