@@ -3,7 +3,7 @@
   "permissionPromptTimeoutSeconds": 5,
   "network": {
     "allowLocalBinding": false,
-    "allowAllUnixSockets": false,
+    "allowAllUnixSockets": true,
     "allowUnauthenticatedSocksProxy": false,
     "allowedDomains": ["{{allowed-domains}}"],
     "deniedDomains": []
