@@ -6,7 +6,7 @@
     "allowAllUnixSockets": true,
     "allowUnauthenticatedSocksProxy": false,
     "allowedDomains": [
-      "*"
+      "{{allowed-domains}}"
     ],
     "deniedDomains": []
   },

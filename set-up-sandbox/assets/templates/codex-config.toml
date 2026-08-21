@@ -1,31 +1,25 @@
 # Project sandbox for Codex. Loaded only when the project is trusted.
-# The permission-profile system is beta — after a Codex update, re-run the
-# escape checks from the set-up-sandbox skill before trusting this config.
+#
+# Verified against codex-cli 0.148.0 on 2026-08-20 by running the skill's
+# escape probes. Two findings shape this file:
+#
+# 1. Codex confines WRITES and command execution. It does not confine READS.
+#    No sandbox mode restricts reading files outside the workspace — the
+#    docs describe workspace-write as "read files, edit within the
+#    workspace". A probe under this config read a file from $HOME.
+# 2. The beta permission-profile block (default_permissions plus
+#    [permissions.<name>.filesystem]) that would have confined reads is
+#    accepted by --strict-config and then ignored. It is not generated here,
+#    because config that looks like a boundary and is not is worse than none.
+#
+# Re-check both after every Codex upgrade with `codex exec --strict-config`
+# and the probes. If a released permission profile gains read confinement,
+# this file should adopt it.
 
-default_permissions = "project-locked"
+sandbox_mode = "workspace-write"
 approval_policy = "never"
 
-[features]
-# The proxy stays on even though every domain is allowed below. Turning it
-# off would make the domain rules silently stop enforcing, so a later
-# tightening of that list would look applied without being applied.
-network_proxy = true
-
-[permissions.project-locked.filesystem]
-":minimal" = "read"
-
-[permissions.project-locked.filesystem.":workspace_roots"]
-"." = "write"
-"**/*.env" = "deny"
-"**/*.pem" = "deny"
-"**/*.key" = "deny"
-
-[permissions.project-locked.network]
-enabled = true
-
-[permissions.project-locked.network.domains]
-# Egress is open by default: the repository is the blast radius, and the
-# allowlist was never a real exfiltration boundary anyway. To tighten,
-# replace this line with one "allow" line per domain the stack needs
-# and add a final '"*" = "deny"'.
-"*" = "allow"
+[sandbox_workspace_write]
+# Egress is open: the repository is the blast radius either way, and Codex
+# offers no read boundary to protect. Set to false to cut network access.
+network_access = true
