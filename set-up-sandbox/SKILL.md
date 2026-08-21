@@ -46,7 +46,7 @@ If agent sandbox config already exists, this is an update: ask what the user wan
 
 ## Generate
 
-Fill the templates for the selected agents, resolve the deny lists from the settled policy, and commit:
+Fill the templates for the selected agents, resolve the deny lists from the settled policy, and commit. The template's `~`-path deny list is a superset — trim it against the host at generation time: always keep the universal core (`~/.ssh`, `~/.gnupg`, the agent CLI state — `~/.claude/**`, `~/.claude.json`, `~/.codex/**`, `~/.pi/**` —, `~/.netrc`, `~/.npmrc`, the rc-file Edit rules, and the personal directories), and keep a tool-specific entry (`~/.aws`, `~/.kube`, `~/.docker`, `~/.config/gh`, `~/.config/gcloud`, `~/.local/share/keyrings`, `~/.pgpass`) only when that path exists on the host — check before the sandbox config is written, while `$HOME` is still readable. A deny for a path that does not exist protects nothing; note in the handover that installing such a tool later means re-running the skill:
 
 | Agent       | Destination                                        | Template                                                                        |
 | ----------- | -------------------------------------------------- | ------------------------------------------------------------------------------- |
