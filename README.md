@@ -22,6 +22,12 @@ Or install a specific skill:
 npx skills add builtbystef/skills --skill set-up-sandbox
 ```
 
+To update the skills:
+
+```bash
+npx skills add builtbystef/skills update
+```
+
 ## Skills
 
 | Skill                                                 | Purpose                                                            | Invoked by   |
