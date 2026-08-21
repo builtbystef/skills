@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "permissionPromptTimeoutSeconds": 5,
+  "permissionPromptTimeoutSeconds": 30,
   "network": {
     "allowLocalBinding": false,
     "allowAllUnixSockets": false
@@ -26,10 +26,13 @@
       "~/.cache"
     ],
     "allowWrite": [
-      "."
+      ".",
+      "/tmp"
     ],
     "denyWrite": [
       ".pi",
+      ".claude",
+      ".codex",
       ".env",
       ".env.*",
       "*.pem",
