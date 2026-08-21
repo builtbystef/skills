@@ -14,7 +14,7 @@ Run these recipes in a repository that carries the native sandbox config from th
 LOOP_AGENT_CMD='claude -p --permission-mode acceptEdits --model <model> --effort <effort>'
 ```
 
-Pin the model and effort. Claude Code supports `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. With the project's sandbox config, sandboxed Bash auto-runs and edits inside the repository auto-approve; anything else fails closed, because print mode cannot prompt.
+Pin the model and effort. Claude Code supports `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. With the project's sandbox config, sandboxed Bash auto-runs and edits inside the repository auto-approve; anything else fails closed, because print mode cannot prompt. Accept the workspace trust dialog once, interactively, before the first run — without it the config's `WebFetch(domain:*)` allow rule is silently ignored, and network egress (`curl`, `npm install`) can fail mid-loop.
 
 ## OpenAI Codex
 
