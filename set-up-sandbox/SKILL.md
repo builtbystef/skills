@@ -20,9 +20,7 @@ What each agent actually enforces — measured by the probes below on Linux agai
 | Codex | **allowed** | blocked | No sandbox mode confines reads; by design, not a misconfiguration |
 | Claude Code | blocked | blocked | Shell OS-blocked (bwrap masks `$HOME`); native tools prompt-gated, failing closed in print mode, plus named deny rules. Needs the AppArmor bwrap fix on Ubuntu 24.04+ (cautions) — without it no Bash command runs at all |
 
-Never present these as three equivalent options. If the goal is keeping the agent out of the user's other projects, say plainly that Codex cannot do it and Pi can.
-
-Three layers, strongest first: the OS filesystem/network sandbox (the boundary), command deny rules (policy on top), model instructions (not a security layer). Egress is open by default where the agent honours the setting — Claude Code and Codex do; Pi's project-local network config did not take effect. Tell the user the two consequences plainly: secrets they cannot afford to leak do not belong in the repository (the `.env`/key deny globs raise the bar, they are not the boundary), and a prompt injection in a page the agent reads can send repository contents anywhere. An allowlist does not fix that — any admitted code host is an exfiltration channel. The filesystem boundary is unaffected by the open network and is what keeps everything else out of reach.
+Three layers, strongest first: the OS filesystem/network sandbox (the boundary), command deny rules (policy on top), model instructions (not a security layer). Egress is open by default where the agent honours the setting — Claude Code and Codex do; Pi's project-local network config did not take effect. Tell the user the two consequences plainly: secrets they cannot afford to leak do not belong in the repository (the `.env`/key deny globs raise the bar, they are not the boundary), and a prompt injection in a page the agent reads can send repository contents anywhere.
 
 ## Invariants
 
@@ -94,5 +92,3 @@ A failed check is a finding: repair and re-run until each result is unambiguous.
 ## Hand over
 
 Tell the user: start each agent exactly as usual — `claude`, `codex`, `pi` — in this repository; the sandbox rides along, no wrapper. Sandboxed Bash runs without prompts (Claude Code: `autoAllowBashIfSandboxed`; Codex: `approval_policy = "never"`), so sessions are already near-autonomous. For unattended runs give the exact commands — `claude -p --permission-mode acceptEdits`, `codex exec`, `pi -p --approve` — repeat the enforcement table, name the agent whose probes actually passed, and repeat that the bypass flags undo this setup. The lasting rules: no secrets in the repository the user cannot lose; the developer pushes from their own shell after review; review `git diff -- .claude/ .codex/ .pi/` before each session; a repository without this config has no protection — run the skill there first.
-
-A project that genuinely needs `sudo`, system services, or native Windows is outside what this sandbox can hold. Use a disposable container or VM there — the container variant of this skill lives in this repository's git history.
