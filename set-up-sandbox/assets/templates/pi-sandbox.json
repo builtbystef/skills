@@ -9,12 +9,21 @@
     "denyRead": [
       "/home",
       "/Users",
+      "~/Main",
+      "~/Temporary",
       "/run/docker.sock",
       "/var/run/docker.sock",
       "/run/podman/podman.sock"
     ],
     "allowRead": [
-      "."
+      ".",
+      "~/.gitconfig",
+      "~/.local/bin",
+      "~/.nvm",
+      "~/.cargo",
+      "~/.rustup",
+      "~/.npm",
+      "~/.cache"
     ],
     "allowWrite": [
       "."
