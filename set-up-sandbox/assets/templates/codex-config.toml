@@ -6,8 +6,9 @@ default_permissions = "project-locked"
 approval_policy = "never"
 
 [features]
-# Without the proxy, the domain rules below do not enforce and commands
-# have direct network access.
+# The proxy stays on even though every domain is allowed below. Turning it
+# off would make the domain rules silently stop enforcing, so a later
+# tightening of that list would look applied without being applied.
 network_proxy = true
 
 [permissions.project-locked.filesystem]
@@ -23,7 +24,8 @@ network_proxy = true
 enabled = true
 
 [permissions.project-locked.network.domains]
-# {{allowed-domains}} — one "allow" line per domain from the settled policy.
-"github.com" = "allow"
-"*.github.com" = "allow"
-"*" = "deny"
+# Egress is open by default: the repository is the blast radius, and the
+# allowlist was never a real exfiltration boundary anyway. To tighten,
+# replace this line with one "allow" line per domain the stack needs
+# and add a final '"*" = "deny"'.
+"*" = "allow"

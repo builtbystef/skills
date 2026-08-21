@@ -5,14 +5,18 @@
     "allowUnsandboxedCommands": false,
     "autoAllowBashIfSandboxed": true,
     "filesystem": {
-      "denyRead": ["~/"],
-      "allowRead": ["."]
-    },
-    "network": {
-      "allowedDomains": ["{{allowed-domains}}"]
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        "."
+      ]
     }
   },
   "permissions": {
+    "allow": [
+      "WebFetch(domain:*)"
+    ],
     "deny": [
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",

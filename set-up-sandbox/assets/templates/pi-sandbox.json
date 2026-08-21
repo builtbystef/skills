@@ -5,7 +5,9 @@
     "allowLocalBinding": false,
     "allowAllUnixSockets": true,
     "allowUnauthenticatedSocksProxy": false,
-    "allowedDomains": ["{{allowed-domains}}"],
+    "allowedDomains": [
+      "*"
+    ],
     "deniedDomains": []
   },
   "filesystem": {
@@ -16,8 +18,18 @@
       "/var/run/docker.sock",
       "/run/podman/podman.sock"
     ],
-    "allowRead": ["."],
-    "allowWrite": ["."],
-    "denyWrite": [".pi", ".env", ".env.*", "*.pem", "*.key"]
+    "allowRead": [
+      "."
+    ],
+    "allowWrite": [
+      "."
+    ],
+    "denyWrite": [
+      ".pi",
+      ".env",
+      ".env.*",
+      "*.pem",
+      "*.key"
+    ]
   }
 }
