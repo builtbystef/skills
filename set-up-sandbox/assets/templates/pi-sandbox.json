@@ -6,10 +6,6 @@
     "allowAllUnixSockets": false
   },
   "filesystem": {
-    "allowRead": [
-      ".",
-      "~/"
-    ],
     "denyRead": [
       "~/Main",
       "~/.ssh",
@@ -28,7 +24,6 @@
       "~/.npmrc",
       "~/.pgpass",
       "/run/docker.sock",
-      "/var/run/docker.sock",
       "/run/podman/podman.sock"
     ],
     "allowWrite": [
@@ -44,7 +39,6 @@
     "denyWrite": [
       ".pi",
       ".claude",
-      ".codex",
       "~/.cache/ccache",
       "~/.cache/go-build",
       ".env",

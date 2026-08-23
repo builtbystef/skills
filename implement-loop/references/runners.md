@@ -6,7 +6,7 @@
 - The command receives the iteration prompt **on stdin**. Exception: if the command contains the placeholder `{PROMPT_FILE}`, the script substitutes the path of the prompt file, and it does not pipe.
 - The command must never prompt a human. Anything interactive stalls until `LOOP_TIMEOUT` (default 3600 s) kills it, and the iteration counts as failed.
 
-Run these recipes in a repository that carries the native sandbox config from the `set-up-sandbox` skill. The recipes run without prompts; the project's sandbox config is what confines them. Never add the bypass flags: `--dangerously-skip-permissions` auto-approves everything the project's deny rules do not name, and `--dangerously-bypass-approvals-and-sandbox` turns the Codex sandbox off entirely. Without sandbox config in the repository, these recipes give each iteration broad access to the machine and its credentials — that posture is the user's to accept.
+Run these recipes in a repository that carries the native sandbox config from the `set-up-sandbox` skill. The recipes run without prompts; the project's sandbox config is what confines them. Never add bypass flags such as `--dangerously-skip-permissions` — they auto-approve everything the project's deny rules do not name. Without sandbox config in the repository, these recipes give each iteration broad access to the machine and its credentials — that posture is the user's to accept.
 
 ## Claude Code
 
@@ -15,10 +15,6 @@ LOOP_AGENT_CMD='claude -p --permission-mode acceptEdits --model <model> --effort
 ```
 
 Pin the model and effort. Claude Code supports `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. With the project's sandbox config, sandboxed Bash auto-runs and edits inside the repository auto-approve; anything else fails closed, because print mode cannot prompt. Accept the workspace trust dialog once, interactively, before the first run — without it the config's `WebFetch(domain:*)` allow rule is silently ignored, and network egress (`curl`, `npm install`) can fail mid-loop.
-
-## OpenAI Codex — not a loop runner
-
-Do not use `codex exec` as `LOOP_AGENT_CMD`. Codex has no read confinement in any mode (measured on codex-cli 0.148.0): its sandbox blocks writes and commands, but an unattended session can read anything on the machine, including the directories the sandbox setup protects. Codex is fine interactively, where the user watches what it does — never unattended. Re-check after Codex upgrades; if read confinement ships, this section can change.
 
 ## Pi
 
@@ -30,7 +26,7 @@ Pin the model and thinking level. Pi supports `off`, `minimal`, `low`, `medium`,
 
 ## Any other agent
 
-Any non-interactive agent CLI works. For a prompt file, use:
+Any non-interactive agent CLI works — add your own recipe here. Before doing so, measure what its sandbox actually enforces unattended: an agent that cannot confine *reads* exposes everything the sandbox setup protects, and belongs in interactive use only. For a prompt file, use:
 
 ```sh
 LOOP_AGENT_CMD='someagent run --auto --prompt-file {PROMPT_FILE}'
