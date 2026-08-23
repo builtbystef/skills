@@ -54,4 +54,4 @@ Each file below starts from a template in [assets/templates/](assets/templates/)
 
 A second run of this skill on a grown project is safe and expected. It fills only what is missing, checks that the stack now supports, CI when a remote exists,  and it never recreates what is there.
 
-When the setup is done, suggest the `set-up-sandbox` skill as the follow-up: it gives the repository OS-enforced sandbox config, so that agent sessions here can run autonomously with their blast radius confined to the repository.
+When the setup is done, suggest the `set-up-sandbox` skill as the follow-up: it gives the repository OS-enforced sandbox config, so that agent sessions here can run autonomously — writes confined to the repository, the user's protected directories and credentials unreadable.

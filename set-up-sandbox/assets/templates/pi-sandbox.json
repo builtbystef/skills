@@ -6,42 +6,47 @@
     "allowAllUnixSockets": false
   },
   "filesystem": {
+    "allowRead": [
+      ".",
+      "~/"
+    ],
     "denyRead": [
-      "/home",
-      "/Users",
       "~/Main",
-      "~/Temporary",
+      "~/.ssh",
+      "~/.gnupg",
+      "~/.aws",
+      "~/.kube",
+      "~/.docker",
+      "~/.config/gh",
+      "~/.config/gcloud",
+      "~/.local/share/keyrings",
       "~/.claude/.credentials.json",
-      "~/.claude/projects",
+      "~/.claude.json",
       "~/.codex/auth.json",
-      "~/.codex/sessions",
       "~/.pi/agent/auth.json",
-      "~/.pi/agent/sessions",
+      "~/.netrc",
+      "~/.npmrc",
+      "~/.pgpass",
       "/run/docker.sock",
       "/var/run/docker.sock",
       "/run/podman/podman.sock"
     ],
-    "allowRead": [
-      ".",
-      "~/.claude",
-      "~/.codex",
-      "~/.pi",
-      "~/.gitconfig",
-      "~/.local/bin",
-      "~/.nvm",
-      "~/.cargo",
-      "~/.rustup",
-      "~/.npm",
-      "~/.cache"
-    ],
     "allowWrite": [
       ".",
-      "/tmp"
+      "/tmp",
+      "~/.cache",
+      "~/.npm",
+      "~/.local/share/pnpm",
+      "~/.cargo/registry",
+      "~/.cargo/git",
+      "~/go/pkg/mod"
     ],
     "denyWrite": [
       ".pi",
       ".claude",
       ".codex",
+      "~/.cache/ccache",
+      "~/.cache/go-build",
       ".env",
       ".env.*",
       "*.pem",

@@ -16,13 +16,9 @@ LOOP_AGENT_CMD='claude -p --permission-mode acceptEdits --model <model> --effort
 
 Pin the model and effort. Claude Code supports `low`, `medium`, `high`, `xhigh`, and `max`, depending on the model. With the project's sandbox config, sandboxed Bash auto-runs and edits inside the repository auto-approve; anything else fails closed, because print mode cannot prompt. Accept the workspace trust dialog once, interactively, before the first run — without it the config's `WebFetch(domain:*)` allow rule is silently ignored, and network egress (`curl`, `npm install`) can fail mid-loop.
 
-## OpenAI Codex
+## OpenAI Codex — not a loop runner
 
-```sh
-LOOP_AGENT_CMD='codex exec --model <model> --config model_reasoning_effort=<effort>'
-```
-
-Pin the model and `model_reasoning_effort`; supported effort levels depend on the model. The project's `.codex/config.toml` supplies the sandbox profile and `approval_policy = "never"` — but only when the project is trusted in Codex, so trust it once, interactively, before the first run.
+Do not use `codex exec` as `LOOP_AGENT_CMD`. Codex has no read confinement in any mode (measured on codex-cli 0.148.0): its sandbox blocks writes and commands, but an unattended session can read anything on the machine, including the directories the sandbox setup protects. Codex is fine interactively, where the user watches what it does — never unattended. Re-check after Codex upgrades; if read confinement ships, this section can change.
 
 ## Pi
 
