@@ -6,6 +6,7 @@
     "allowAllUnixSockets": false
   },
   "filesystem": {
+    "allowRead": [],
     "denyRead": [
       "~/Main",
       "~/.ssh",
