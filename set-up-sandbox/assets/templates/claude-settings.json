@@ -6,10 +6,20 @@
     "autoAllowBashIfSandboxed": true,
     "filesystem": {
       "denyRead": [
-        "~/"
+        "~/",
+        "~/.claude/.credentials.json",
+        "~/.claude/projects",
+        "~/.codex/auth.json",
+        "~/.codex/sessions",
+        "~/.pi/agent/auth.json",
+        "~/.pi/agent/sessions"
       ],
       "allowRead": [
         ".",
+        "~/.claude",
+        "~/.claude/projects/<this-projects-transcript-dir>",
+        "~/.codex",
+        "~/.pi",
         "~/.gitconfig",
         "~/.local/bin",
         "~/.nvm",
@@ -25,6 +35,9 @@
       "WebFetch(domain:*)"
     ],
     "deny": [
+      "Read(~/Code/**/.env*)",
+      "Read(~/Code/**/*.pem)",
+      "Read(~/Code/**/*.key)",
       "Read(~/Main/**)",
       "Edit(~/Main/**)",
       "Read(~/Temporary/**)",
@@ -37,11 +50,14 @@
       "Read(~/.config/gh/**)",
       "Read(~/.config/gcloud/**)",
       "Read(~/.local/share/keyrings/**)",
-      "Read(~/.claude/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.claude/projects/**)",
       "Read(~/.claude.json)",
       "Read(~/.claude.json.backup)",
-      "Read(~/.codex/**)",
-      "Read(~/.pi/**)",
+      "Read(~/.codex/auth.json)",
+      "Read(~/.codex/sessions/**)",
+      "Read(~/.pi/agent/auth.json)",
+      "Read(~/.pi/agent/sessions/**)",
       "Read(~/.npmrc)",
       "Read(~/.netrc)",
       "Read(~/.pgpass)",

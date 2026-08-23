@@ -32,7 +32,16 @@
       "~/.netrc": "deny",
       "~/.pgpass": "deny",
       "~/Main/*": "deny",
-      "~/Temporary/*": "deny"
+      "~/Temporary/*": "deny",
+      "~/.claude/*": "allow",
+      "~/.codex/*": "allow",
+      "~/.pi/*": "allow",
+      "~/.claude/.credentials.json": "deny",
+      "~/.claude/projects/*": "deny",
+      "~/.codex/auth.json": "deny",
+      "~/.codex/sessions/*": "deny",
+      "~/.pi/agent/auth.json": "deny",
+      "~/.pi/agent/sessions/*": "deny"
     },
     "bash": {
       "*": "allow",
