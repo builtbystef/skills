@@ -45,8 +45,6 @@
       ".claude",
       "~/.cache/ccache",
       "~/.cache/go-build",
-      ".env",
-      ".env.*",
       "*.pem",
       "*.key"
     ]
