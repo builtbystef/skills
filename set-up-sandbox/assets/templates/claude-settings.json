@@ -5,6 +5,10 @@
     "allowUnsandboxedCommands": false,
     "autoAllowBashIfSandboxed": true,
     "filesystem": {
+      "allowRead": [
+        "**/site-packages/certifi/cacert.pem",
+        "**/site-packages/botocore/cacert.pem"
+      ],
       "denyRead": [
         "~/Main",
         "~/.ssh",
@@ -25,6 +29,7 @@
         "~/.pgpass"
       ],
       "allowWrite": [
+        "/tmp",
         "~/.cache",
         "~/.npm",
         "~/.local/share/pnpm",

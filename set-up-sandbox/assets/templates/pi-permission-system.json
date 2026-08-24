@@ -13,6 +13,8 @@
       "*.env.example": "allow",
       "*.pem": "deny",
       "*.key": "deny",
+      "*/site-packages/certifi/cacert.pem": "allow",
+      "*/site-packages/botocore/cacert.pem": "allow",
       ".pi/*": "deny",
       "*/.pi/*": "deny",
       ".claude/*": "deny",

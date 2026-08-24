@@ -2,7 +2,6 @@
   "enabled": true,
   "permissionPromptTimeoutSeconds": 30,
   "network": {
-    "allowLocalBinding": false,
     "allowAllUnixSockets": false
   },
   "filesystem": {
@@ -25,7 +24,7 @@
       "~/.npmrc",
       "~/.pgpass",
       "/run/docker.sock",
-      "/run/podman/podman.sock"
+      "/run/user/1000/podman/podman.sock"
     ],
     "allowWrite": [
       ".",
