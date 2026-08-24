@@ -56,6 +56,6 @@
       "kubectl apply*": "deny",
       "kubectl delete*": "deny"
     },
-    "external_directory": "deny"
+    "external_directory": "allow"
   }
 }
