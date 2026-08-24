@@ -8,6 +8,7 @@
     "allowRead": [],
     "denyRead": [
       "~/Main",
+      "~/dotfiles",
       "~/.ssh",
       "~/.gnupg",
       "~/.aws",
@@ -18,13 +19,16 @@
       "~/.local/share/keyrings",
       "~/.claude/.credentials.json",
       "~/.claude.json",
+      "~/.claude.json.backup",
       "~/.codex/auth.json",
       "~/.pi/agent/auth.json",
       "~/.netrc",
       "~/.npmrc",
       "~/.pgpass",
       "/run/docker.sock",
-      "/run/user/1000/podman/podman.sock"
+      "/run/user/1000/podman/podman.sock",
+      "/run/user/1000/keyring",
+      "/run/user/1000/gnupg"
     ],
     "allowWrite": [
       ".",

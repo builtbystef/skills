@@ -11,6 +11,7 @@
       ],
       "denyRead": [
         "~/Main",
+        "~/dotfiles",
         "~/.ssh",
         "~/.gnupg",
         "~/.aws",
@@ -26,7 +27,11 @@
         "~/.pi/agent/auth.json",
         "~/.netrc",
         "~/.npmrc",
-        "~/.pgpass"
+        "~/.pgpass",
+        "/run/docker.sock",
+        "/run/user/1000/podman/podman.sock",
+        "/run/user/1000/keyring",
+        "/run/user/1000/gnupg"
       ],
       "allowWrite": [
         "/tmp",
@@ -50,6 +55,8 @@
     "deny": [
       "Read(~/Main/**)",
       "Edit(~/Main/**)",
+      "Read(~/dotfiles/**)",
+      "Edit(~/dotfiles/**)",
       "Read(~/.ssh/**)",
       "Read(~/.gnupg/**)",
       "Read(~/.aws/**)",
@@ -103,6 +110,8 @@
       "Bash(ssh:*)",
       "Bash(scp:*)",
       "Bash(git push:*)",
+      "Bash(docker:*)",
+      "Bash(podman:*)",
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)",
       "Bash(kubectl apply:*)",
