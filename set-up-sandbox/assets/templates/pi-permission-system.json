@@ -1,9 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/gotgenes/pi-packages/main/packages/pi-permission-system/schemas/permissions.schema.json",
-
   "yoloMode": false,
   "permissionReviewLog": true,
-
   "permission": {
     "*": "allow",
     "path": {
@@ -35,7 +33,12 @@
       "~/.pi/agent/auth.json": "deny",
       "~/.netrc": "deny",
       "~/.npmrc": "deny",
-      "~/.pgpass": "deny"
+      "~/.pgpass": "deny",
+      "/run/docker.sock": "deny",
+      "/run/podman/podman.sock": "deny",
+      "/run/user/1000/podman/podman.sock": "deny",
+      "/run/user/1000/keyring": "deny",
+      "/run/user/1000/gnupg": "deny"
     },
     "bash": {
       "*": "allow",
