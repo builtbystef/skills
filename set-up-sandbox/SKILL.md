@@ -28,10 +28,19 @@ Useful properties that fall out for free (all verified live 2026-08-27):
 
 - **sudo is dead** by nosuid — no command deny-list to maintain or bypass.
 - **Agents cannot ssh**: `~/.ssh` masked kills ssh-based git remotes and any other ssh use.
-- **`gh` works inside, on a leash**: gh is logged in with a **fine-grained PAT** (Contents + Pull requests read/write, Metadata read; **no** Administration, no Workflows) via `gh auth login --with-token --insecure-storage` — insecure-storage is required because the keyring is masked inside the wrapper, so the token must live in `~/.config/gh/hosts.yml`. Agents can view repos and create/merge/close PRs; they cannot delete repos, change settings, manage keys/secrets, or touch workflow files. The token's permissions, not the wrapper, are the boundary for remote actions. `~/.config/gh` is ro-bound so agents can't log in a broader token.
+- **`gh` works inside, on a leash** — see "GitHub CLI" below; the token's scopes, not the wrapper, bound remote actions.
 - **ssh-agent/gpg-agent are unreachable** — `ssh-add -l` inside must fail with `Error connecting to agent: No such file or directory` (that exact error is the mask working).
 - **`~/dotfiles` stays readable** so rc files (symlinked into it) load normally inside — verified to contain no secrets before choosing ro over mask. Re-check if secrets ever land there.
 - A write into a masked dir "succeeds" into the tmpfs and evaporates; a masked dir lists as empty. Both are the mask working, not a bug.
+
+## GitHub CLI (optional)
+
+If the user wants agents to use `gh` (view/create/merge/close PRs), have them log it in with a **fine-grained PAT**, not their broad OAuth token:
+
+1. github.com → Settings → Developer settings → Fine-grained tokens: scope it to the repos agents work on, permissions **Contents** and **Pull requests** read/write, **Metadata** read — **no** Administration, no Workflows.
+2. `gh auth login --with-token --insecure-storage` (paste the PAT). `--insecure-storage` is required: the keyring is masked inside the wrapper, so the token must live in `~/.config/gh/hosts.yml`.
+
+Agents then can't delete repos, change settings, manage keys/secrets, or touch workflow files. `~/.config/gh` stays ro-bound so they can't log in a broader token.
 
 ## Verify after install (and after any bwrap/OS upgrade)
 

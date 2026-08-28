@@ -43,8 +43,6 @@ ro "$H/.bashrc"
 ro "$H/.profile"
 ro "$H/.zshenv"
 ro "$H/.claude/settings.json"
-# gh: fine-grained PAT (read + PRs, no admin scopes) — the token's permissions
-# bound what agents can do remotely; ro so they can't swap in another token.
 ro "$H/.config/gh"
 
 exec bwrap "${args[@]}" -- "$@"
