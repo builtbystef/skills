@@ -28,7 +28,7 @@ Useful properties that fall out for free (all verified live 2026-08-27):
 
 - **sudo is dead** by nosuid — no command deny-list to maintain or bypass.
 - **Agents cannot ssh**: `~/.ssh` masked kills ssh-based git remotes and any other ssh use.
-- **`gh` works inside, on a leash** — see "GitHub CLI" below; the token's scopes, not the wrapper, bound remote actions.
+- **`gh` works inside** — see "GitHub CLI" below; the token's scopes, not the wrapper, bound remote actions.
 - **ssh-agent/gpg-agent are unreachable** — `ssh-add -l` inside must fail with `Error connecting to agent: No such file or directory` (that exact error is the mask working).
 - **`~/dotfiles` stays readable** so rc files (symlinked into it) load normally inside — verified to contain no secrets before choosing ro over mask. Re-check if secrets ever land there.
 - A write into a masked dir "succeeds" into the tmpfs and evaporates; a masked dir lists as empty. Both are the mask working, not a bug.
